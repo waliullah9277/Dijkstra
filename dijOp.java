@@ -19,10 +19,12 @@ public class dijOp {
     static Vector<Edge>[] vector = new Vector[N];
     static int[] dis = new int[N];
     static boolean[] visited = new boolean[N];
+    static int[] par = new int[N];
 
     public static void dijkstra(int s){
         PriorityQueue<Edge> pq = new PriorityQueue<>(new EdgeCom());
         dis[s] = 0;
+        par[s] = -1;
         pq.add(new Edge(s, 0));
 
         while(!pq.isEmpty()){
@@ -41,15 +43,16 @@ public class dijOp {
                 if(parentCost + childCost < dis[childNode]){
                     dis[childNode] = parentCost + childCost;
                     pq.add(new Edge(childNode, dis[childNode]));
+                    par[childNode] = parentNode;
                 }
             }
         }
     }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.print("Enter your node: ");
+        // System.out.print("Enter your node: ");
         int n = in.nextInt();
-        System.out.print("Enter your edge: ");
+        // System.out.print("Enter your edge: ");
         int e = in.nextInt();
 
         for(int i=1; i<=n; i++){
@@ -66,10 +69,30 @@ public class dijOp {
             vector[v].add(new Edge(u, w));
         }
 
-        dijkstra(1);
+        int s = in.nextInt();
+        int d = in.nextInt();
 
-        for(int i=1; i<=n; i++){
-            System.out.println("Node "+i+": "+dis[i]);
+        dijkstra(s);
+
+        if(visited[d]){
+            int x = d;
+            Vector<Integer> path = new Vector<>();
+            while(x != -1){
+                path.add(x);
+                x = par[x];
+            }
+
+            Collections.reverse(path);
+
+            System.out.print("Shortest Path in this graph: ");
+            for(int val: path){
+                System.out.print(val+" ");
+            }
         }
+        System.out.println("Minimum cost of this path is: "+dis[d]);
+
+        // for(int i=1; i<=n; i++){
+        //     System.out.println("Node "+i+": "+dis[i]);
+        // }
     }
 }
