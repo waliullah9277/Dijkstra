@@ -38,3 +38,10 @@ Space Complexity:
 O(V) for storing distances and visited nodes.
 
 Dijkstra’s algorithm is particularly effective when working with dense graphs and graphs with non-negative edge weights.
+
+
+![image](https://github.com/user-attachments/assets/e463db49-790b-4094-a0b3-62f461bba07d)
+
+![image](https://github.com/user-attachments/assets/841e30af-d232-4e8c-b80f-92fadb943bde)
+
+
